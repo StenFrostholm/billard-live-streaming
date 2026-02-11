@@ -1,0 +1,98 @@
+# Billiard Live TV - Requirements Document
+## Project Overview
+Create a bash script using FFmpeg to fetch two IP cameras and process the images to create a live TV broadcast for billiard games with table and whiteboard overlays.
+## Functional Requirements
+### 1. Camera Input Processing
+- [x] Support for two IP camera streams via RTSP protocol
+- [x] Configurable camera URLs with authentication support
+- [x] TCP transport for reliable streaming
+- [x] Automatic scaling of camera inputs to consistent resolution
+### 2. Video Processing
+- [x] Combine two camera feeds into single output
+- [x] Horizontal stacking of camera views (side-by-side)
+- [x] Real-time processing with minimal latency
+- [x] Configurable output resolution and frame rate
+### 3. Overlay System
+- [x] Billiard table overlay with configurable position
+- [x] Whiteboard overlay for scorekeeping with configurable position
+- [x] Automatic creation of default overlay images if missing
+- [x] Support for custom overlay images (PNG format)
+### 3.1 Whiteboard Angle Correction
+- [ ] Whiteboard angle correction: 30-degree placement with trigonometric rectangularity correction
+  - Implement bash trigonometric functions for perspective correction
+  - Configurable angle parameter (default: 30 degrees)
+  - Maintain aspect ratio during transformation
+  - Real-time calculation for dynamic positioning
+### 3.2 Camera Lens Distortion Correction
+- [ ] Camera lens distortion correction for both input streams
+  - Implement FFmpeg lens correction filters
+  - Configurable distortion parameters (k1, k2, k3)
+  - Automatic calibration pattern detection (future)
+  - Manual parameter adjustment support
+  - Real-time processing with minimal performance impact
+### 3.3 Memory-Efficient Processing
+- [ ] Memory-efficient inter-process communication with configurable RAM/pipe usage
+  - Use RAM-based pipes for optimal performance (default)
+  - Configurable fallback to disk-based pipes for low-memory systems
+  - Automatic memory detection and recommendation system
+  - Command-line parameter for pipe location control
+  - Performance monitoring for pipe usage optimization
+### 4. Camera Configuration
+- [ ] Hikvision camera RTSP configuration
+  - Table camera: rtsp://192.168.8.200:554/stream1 (UDP)
+  - Board camera: rtsp://192.168.8.201:554/stream1 (UDP)
+  - UDP transport protocol support
+  - Authentication configuration for Hikvision cameras
+  - Network configuration for 192.168.8.x subnet
+  - Camera-specific parameter optimization
+### 5. Whiteboard Overlay Configuration
+- [ ] Advanced whiteboard overlay configuration with flexible placement
+  - Whiteboard overlay positioned on top of table image
+  - Default position: top-left corner of table overlay
+  - Configurable scaling parameters (width, height, aspect ratio)
+  - Configurable cropping parameters (x, y, width, height)
+  - Easy configuration via command-line or config file (easily configurable)
+  - Real-time preview of overlay positioning
+  - Layer ordering control (whiteboard always on top)
+### 6. Testing and Development
+- [ ] MP4 file input support for testing and development
+  - Support for MP4 files as alternative to RTSP streams
+  - Automatic detection of input type (RTSP vs MP4)
+  - Configuration parameter for input source selection
+  - Sample MP4 files for testing different scenarios
+  - Looping capability for continuous testing
+  - Frame rate matching between MP4 and live streams
+  - Easy switching between test and production modes
+### 7. Distributed Processing Architecture
+- [ ] Modular distributed processing with dedicated hardware components
+  - Individual camera processing on separate Raspberry Pi units
+  - RTSP streaming between processing stages
+  - Dedicated hardware for final composition and YouTube streaming
+  - Load balancing across multiple Raspberry Pi devices
+  - Fault tolerance and automatic failover
+  - Centralized configuration management
+  - Performance monitoring for distributed system
+## Technical Requirements
+### Dependencies
+- [x] FFmpeg with libx264 support
+- [x] Bash shell environment
+- [x] Git for version control
+## Testing Requirements
+### Test Coverage
+- [x] Basic functionality verification
+- [x] Configuration validation
+- [x] Error condition testing
+- [x] Performance benchmarking
+- [x] Cross-platform compatibility testing
+## Deployment Requirements
+### Installation
+- [x] Simple installation process
+- [x] Clear dependency documentation
+- [x] Version control integration
+- [x] Release packaging
+## Notes
+- All RTSP URLs should be properly secured with authentication
+- Overlay images should be optimized for the target resolution
+- Network bandwidth should be considered for streaming quality
+- Camera placement should provide good coverage of the billiard table
+- Testing should be done with actual camera equipment before live use
