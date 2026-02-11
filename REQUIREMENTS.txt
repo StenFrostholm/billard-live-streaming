@@ -38,9 +38,9 @@ Create a bash script using FFmpeg to fetch two IP cameras and process the images
   - Command-line parameter for pipe location control
   - Performance monitoring for pipe usage optimization
 ### 4. Camera Configuration
-- [ ] Hikvision camera RTSP configuration
-  - Table camera: rtsp://192.168.8.200:554/stream1 (UDP)
-  - Board camera: rtsp://192.168.8.201:554/stream1 (UDP)
+- [x] Hikvision camera RTSP configuration
+  - Table camera: rtsp://admin:Pass123!@192.168.8.200:554/Streaming/Channels/101
+  - Board camera: rtsp://admin:Pass123!@192.168.8.201:554/Streaming/Channels/101
   - UDP transport protocol support
   - Authentication configuration for Hikvision cameras
   - Network configuration for 192.168.8.x subnet
@@ -72,6 +72,39 @@ Create a bash script using FFmpeg to fetch two IP cameras and process the images
   - Fault tolerance and automatic failover
   - Centralized configuration management
   - Performance monitoring for distributed system
+### 8. RTSP Server Configuration (Future - Distributed System)
+#### 8.1 Camera Credentials
+- [x] Hikvision Table Camera (192.168.8.200)
+  - Username: admin
+  - Password: Pass123!
+  - RTSP URL: rtsp://admin:Pass123!@192.168.8.200:554/Streaming/Channels/101
+  - Protocol: RTSP over TCP
+- [x] Hikvision Board Camera (192.168.8.201)
+  - Username: admin
+  - Password: Pass123!
+  - RTSP URL: rtsp://admin:Pass123!@192.168.8.201:554/Streaming/Channels/101
+  - Protocol: RTSP over TCP
+#### 8.2 MediaMTX RTSP Server Configuration
+- [ ] Local RTSP server for development/testing
+  - Board camera stream: rtsp://localhost:8554/mystream
+  - Table camera stream: rtsp://localhost:8555/mystream
+  - Server software: MediaMTX
+  - Purpose: Local development and testing without direct camera access
+#### 8.3 RTMP Server Configuration
+- [ ] Streaming output server
+  - RTMP URL: rtmp://your_streaming_server/live/billiard_stream
+  - Protocol: RTMP
+  - Purpose: Final output for YouTube/streaming platforms
+  - Note: Configured separately from processing pipeline
+#### 8.4 Security Considerations
+- [ ] Credential management for production
+  - Environment variables for sensitive data
+  - Configuration file encryption
+  - Secure credential storage
+- [ ] Network security
+  - RTSP authentication
+  - Network segmentation
+  - Firewall rules for camera access
 ## Technical Requirements
 ### Dependencies
 - [x] FFmpeg with libx264 support
